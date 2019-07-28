@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="margin: 20px auto;
+padding: 20px;
+">
+        <br><br>
+        <h1>{{notice.title }}</h1>
+        <p>{{ notice.pub_date }}</p>
+        <p>{{ notice.body }}</p>
+        {% if user.is_superuser %}
+        <a class="btn btn-outline-dark" href="{% url 'update' notice.id %}">수정</a>
+        <a class="btn btn-outline-dark" href="{% url 'delete' notice.id %}">삭제</a>
+        {%endif%}
+</div>
+        <br><br>
+        {% if user.is_staff %}
+        <form action="{% url 'comment_create' notice.id %}" method="POST" >
+                {% csrf_token %}
+                <input type="text" name="content" placeholder="Write your comments">
+                <p></p>
+                <input type="text" name="writer" placeholder="Write your name">
+                <input class="btn btn-outline-dark" type="submit" value="Write">
+        </form>
+        {% endif %}
+        <hr>
+        {% for comment in notice.comments.all %}
+        <div class="comment">
+                <div class="date">{{comment.comment_date}}</div>
+                <p>{{comment.comment_writer}}</p>
+                <h4>{{comment.comment_contents}}</h4>
+                {% if user.username == comment.comment_writer %}
+                <a class="btn btn-outline-dark" href="{% url 'comment_remove' pk=comment.pk %}">삭제</a>
+                {% endif %}
+        </div>
+        {% endfor %}
+
+
+
+{% endblock %}

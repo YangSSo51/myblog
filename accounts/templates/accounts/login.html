@@ -1,0 +1,66 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+{{ error }}
+<br>
+<br>
+{% endif %}
+
+<style>
+   .btn {
+      background-color: #FAE77D;
+      color: #ffffff;
+    }
+
+    .btn:hover {
+      background-color: rgb(223, 202, 85);
+
+    }
+.form-control:focus{
+  border-color: #FAE77D;
+  color: #000000;
+  background-color: #fff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem #FAE77D;
+}       
+</style>
+  
+<body>
+    <div style="margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+">
+        <div class="login-box" style="margin-left: auto; margin-right: auto;">
+            <div class="text-center mb-4">
+        <br><br>
+        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+        <p>로그인을 하고 글을 작성해보세요!</p></div>
+      
+    <form method="POST" action="{% url 'login'%}" class="form-signin">
+        {% csrf_token %}
+      <div class="form-label-group">
+        이름
+        <input name="username" type="text" class="form-control" value="" required autofocus>
+        
+      </div>
+      <br>비밀번호
+      <div class="form-label-group">
+        <input name="password" type="password" class="form-control" value="" required>
+        
+      </div>
+    
+      <br>
+      <button class="btn btn-lg btn-light btn-block" type="submit">로그인</button>
+  
+    </form>
+</div>
+    
+</div>
+
+
+    {% endblock %}

@@ -1,0 +1,70 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+{{ error }}
+<br>
+<br>
+{% endif %}
+
+<style>
+   .btn {
+      background-color: #FAE77D;
+      color: #ffffff;
+    }
+
+    .btn:hover {
+      background-color: rgb(223, 202, 85);
+
+    }
+.form-control:focus{
+  border-color: #FAE77D;
+  color: #000000;
+  background-color: #fff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem #FAE77D;
+}       
+</style>
+  
+<body>
+    <div style="margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+"> 
+<div class="login-box"> 
+<div class="text-center mb-4">   
+<h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
+</div>
+<form method="POST" action="{% url 'signup'%}">
+
+{% csrf_token %}
+<div class="form-label-group">
+이름
+<br>
+<input name="username" class="form-control"  type="text" value="" required autofocus>
+</div><br>
+<div class="form-label-group">
+비밀번호
+<br>
+<input name="password1" class="form-control" type="password" value="" required>
+</div><br>
+<div class="form-label-group">
+비밀번호 재확인
+<br>
+<input name="password2" class="form-control" type="password" value="" required>
+</div><br>
+
+
+<br>
+<button class="btn btn-lg btn-light btn-block" type="submit">회원가입</button>
+</form>
+</div>
+</div>
+
+
+
+{% endblock %}
